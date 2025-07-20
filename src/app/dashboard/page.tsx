@@ -5,7 +5,9 @@ import { KpiCard } from '@/components/dashboard/kpi-card';
 import { PersonalityMatrix } from '@/components/dashboard/personality-matrix';
 import { RecommendedActions } from '@/components/dashboard/recommended-actions';
 import { PriorityList } from '@/components/dashboard/priority-list';
-import { Users, Activity, Target, TrendingUp } from 'lucide-react';
+import { Users, Activity, Target, TrendingUp, Plus, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 export const metadata: Metadata = {
   title: 'Dashboard | MindScope',
@@ -122,6 +124,34 @@ export default function DashboardPage() {
         
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-muted/40 p-6">
           <div className="max-w-7xl mx-auto space-y-6">
+            {/* Page Header */}
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-foreground">Olá, Reitora Ana.</h1>
+                <p className="text-muted-foreground mt-1">Veja o pulso do engajamento e do perfil de aprendizado dos seus novos alunos.</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="w-[120px]">
+                      30 dias
+                      <ChevronDown className="ml-auto h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>7 dias</DropdownMenuItem>
+                    <DropdownMenuItem>30 dias</DropdownMenuItem>
+                    <DropdownMenuItem>90 dias</DropdownMenuItem>
+                    <DropdownMenuItem>Último ano</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <Button>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Convidar Novo Aluno
+                </Button>
+              </div>
+            </div>
+
             {/* KPIs Grid */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {kpiData.map((kpi) => (
