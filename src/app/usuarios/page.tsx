@@ -23,7 +23,6 @@ import {
 } from '@/components/ui/table';
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Sidebar } from '@/components/dashboard/sidebar';
-import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Usuários | Mindscope',
@@ -53,77 +52,77 @@ interface ActiveCoachee extends Coachee {
 
 // Dados mockados com melhor estrutura
 const nextSessions: NextSession[] = [
-  { 
+  {
     id: '1',
-    name: 'Lucas Gabriel', 
-    time: '09:00', 
-    avatar: 'https://placehold.co/48x48.png', 
+    name: 'Lucas Gabriel',
+    time: '09:00',
+    avatar: '/avatars/01.png',
     insight: 'Foco da sessão: transição de carreira e definição de metas.',
     profileTags: ['Big Five: Alta Abertura', 'Eneagrama: Tipo 4 SX'],
     isUrgent: true
   },
-  { 
+  {
     id: '2',
-    name: 'Mariana Santos', 
-    time: '11:00', 
-    avatar: 'https://placehold.co/48x48.png', 
+    name: 'Mariana Santos',
+    time: '11:00',
+    avatar: '/avatars/02.png',
     insight: 'Revisar o progresso das ações definidas na última sessão.',
     profileTags: ['DISC: Dominância', 'MBTI: ENTJ']
   },
-  { 
+  {
     id: '3',
-    name: 'Ricardo Pereira', 
-    time: '14:30', 
-    avatar: 'https://placehold.co/48x48.png', 
+    name: 'Ricardo Pereira',
+    time: '14:30',
+    avatar: '/avatars/03.png',
     insight: 'Sessão de alinhamento de valores e propósito.',
     profileTags: ['Big Five: Alta Consciência', 'Motivadores: Altruísta']
   },
-  { 
+  {
     id: '4',
-    name: 'Ana Beatriz Costa', 
-    time: '16:00', 
-    avatar: 'https://placehold.co/48x48.png', 
+    name: 'Ana Beatriz Costa',
+    time: '16:00',
+    avatar: '/avatars/04.png',
     insight: 'Cliente novo. Primeira sessão de descoberta.',
     profileTags: ['Assessment Pendente']
   },
 ];
 
 const activeCoachees: ActiveCoachee[] = [
-  { 
+  {
     id: '5',
-    name: 'Juliana Paiva', 
-    avatar: 'https://placehold.co/40x40.png', 
-    assessmentStatus: 'Completo', 
-    profile: 'Big Five: Alta Extroversão', 
+    name: 'Juliana Paiva',
+    avatar: '/avatars/05.png',
+    assessmentStatus: 'Completo',
+    profile: 'Big Five: Alta Extroversão',
     hasNotes: true,
     profileTags: [],
     lastSession: '2024-07-15'
   },
-  { 
+  {
     id: '6',
-    name: 'Fernando Lima', 
-    avatar: 'https://placehold.co/40x40.png', 
-    assessmentStatus: 'Pendente', 
-    profile: 'Eneagrama: Tipo 9 SP', 
+    name: 'Fernando Lima',
+    avatar: '/avatars/06.png',
+    assessmentStatus: 'Pendente',
+    profile: 'Eneagrama: Tipo 9 SP',
     hasNotes: false,
     profileTags: []
   },
-  { 
+  {
     id: '7',
-    name: 'Beatriz Costa', 
-    avatar: 'https://placehold.co/40x40.png', 
-    assessmentStatus: 'Completo', 
-    profile: 'DISC: Influência', 
+    name: 'Beatriz Costa',
+    avatar: '/avatars/07.png',
+    assessmentStatus: 'Completo',
+    profile: 'DISC: Influência',
     hasNotes: true,
     profileTags: [],
     lastSession: '2024-07-18'
   },
-  { 
+  {
     id: '8',
-    name: 'Carlos Mendes', 
-    avatar: 'https://placehold.co/40x40.png', 
-    assessmentStatus: 'Em Andamento', 
-    profile: 'MBTI: ISFJ', 
+    name: 'Carlos Mendes',
+    avatar: '/avatars/08.png',
+    assessmentStatus: 'Em Andamento',
+    profile: 'MBTI: ISFJ',
     hasNotes: true,
     profileTags: [],
     lastSession: '2024-07-16'
@@ -138,10 +137,9 @@ function NextSessionCard({ session, index }: { session: NextSession; index: numb
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <Avatar className="h-12 w-12 ring-2 ring-primary/10">
-              <AvatarImage 
-                src={session.avatar} 
+              <AvatarImage
+                src={`https://i.pravatar.cc/48?img=${index + 1}`}
                 alt={`Avatar de ${session.name}`}
-                data-ai-hint="person"
               />
               <AvatarFallback className="bg-primary/10 text-primary font-semibold">
                 {session.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
@@ -161,13 +159,13 @@ function NextSessionCard({ session, index }: { session: NextSession; index: numb
             </div>
           </div>
         </div>
-        
+
         <div className="mb-4 space-y-2">
           <div className="flex flex-wrap gap-1">
             {session.profileTags.map(tag => (
-              <Badge 
-                key={tag} 
-                variant="secondary" 
+              <Badge
+                key={tag}
+                variant="secondary"
                 className="text-xs px-2 py-1 bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-primary/10 dark:text-primary-foreground"
               >
                 {tag}
@@ -175,14 +173,14 @@ function NextSessionCard({ session, index }: { session: NextSession; index: numb
             ))}
           </div>
         </div>
-        
+
         <Alert className="bg-amber-50 text-amber-900 border-amber-200 dark:bg-yellow-900/20 dark:text-yellow-200 dark:border-yellow-700/50 mb-4">
           <AlertDescription className="flex items-start gap-2 text-sm">
             <span className="text-amber-600 dark:text-yellow-300">💡</span>
             <span className="flex-1 leading-relaxed">{session.insight}</span>
           </AlertDescription>
         </Alert>
-        
+
         <Button variant="ghost" size="sm" className="w-full justify-between p-0 h-auto text-primary hover:text-primary/80">
           <span className="text-sm font-medium">Ver Perfil Completo</span>
           <ArrowRight className="h-4 w-4" />
@@ -195,17 +193,17 @@ function NextSessionCard({ session, index }: { session: NextSession; index: numb
 // Componente para status do assessment
 function AssessmentStatusBadge({ status }: { status: ActiveCoachee['assessmentStatus'] }) {
   const variants = {
-    'Completo': { 
-      variant: 'default' as const, 
-      className: 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200 border-green-200 dark:border-green-700' 
+    'Completo': {
+      variant: 'default' as const,
+      className: 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200 border-green-200 dark:border-green-700'
     },
-    'Pendente': { 
-      variant: 'secondary' as const, 
-      className: 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200 border-orange-200 dark:border-orange-700' 
+    'Pendente': {
+      variant: 'secondary' as const,
+      className: 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200 border-orange-200 dark:border-orange-700'
     },
-    'Em Andamento': { 
-      variant: 'outline' as const, 
-      className: 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 border-blue-200 dark:border-blue-700' 
+    'Em Andamento': {
+      variant: 'outline' as const,
+      className: 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 border-blue-200 dark:border-blue-700'
     }
   };
 
@@ -226,7 +224,7 @@ export default function CoachDashboardPage() {
   return (
     <div className="flex min-h-screen w-full bg-gray-50/50 dark:bg-background">
       <Sidebar />
-      
+
       <div className="flex flex-1 flex-col overflow-hidden">
         <main className="flex-1 space-y-8 p-4 md:p-8 overflow-y-auto">
           {/* Header com informações contextuais */}
@@ -242,7 +240,7 @@ export default function CoachDashboardPage() {
                 )}
               </p>
             </div>
-            
+
             <div className="flex gap-3">
               <Button className="shadow-sm">
                 <Plus className="mr-2 h-4 w-4" />
@@ -263,7 +261,7 @@ export default function CoachDashboardPage() {
                 {todaySessions} hoje
               </Badge>
             </div>
-            
+
             <ScrollArea className="w-full">
               <div className="flex space-x-6 pb-4">
                 {nextSessions.map((session, index) => (
@@ -282,18 +280,18 @@ export default function CoachDashboardPage() {
                 {activeCoachees.length} coachees
               </Badge>
             </div>
-            
+
             <Card className="rounded-xl border-border bg-card shadow-sm">
               <CardHeader className="px-6 py-5 border-b border-border">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="relative flex-1 max-w-md">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input 
-                      placeholder="Buscar usuário..." 
-                      className="pl-10 border-0 bg-muted/50 focus-visible:bg-background" 
+                    <Input
+                      placeholder="Buscar usuário..."
+                      className="pl-10 border-0 bg-muted/50 focus-visible:bg-background"
                     />
                   </div>
-                  
+
                   <div className="flex gap-2">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -313,7 +311,7 @@ export default function CoachDashboardPage() {
                   </div>
                 </div>
               </CardHeader>
-              
+
               <CardContent className="p-0">
                 <Table>
                   <TableHeader>
@@ -328,17 +326,16 @@ export default function CoachDashboardPage() {
                   </TableHeader>
                   <TableBody>
                     {activeCoachees.map((coachee, index) => (
-                      <TableRow 
-                        key={coachee.id} 
+                      <TableRow
+                        key={coachee.id}
                         className="hover:bg-muted/30 transition-colors duration-150"
                       >
                         <TableCell className="font-medium pl-6">
                           <div className="flex items-center gap-3">
                             <Avatar className="h-10 w-10">
-                              <AvatarImage 
-                                src={coachee.avatar} 
-                                alt={`Avatar de ${coachee.name}`} 
-                                data-ai-hint="person"
+                              <AvatarImage
+                                src={`https://i.pravatar.cc/40?img=${index + 10}`}
+                                alt={`Avatar de ${coachee.name}`}
                               />
                               <AvatarFallback className="bg-primary/10 text-primary font-semibold text-sm">
                                 {coachee.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
@@ -352,15 +349,15 @@ export default function CoachDashboardPage() {
                             </div>
                           </div>
                         </TableCell>
-                        
+
                         <TableCell>
                           <AssessmentStatusBadge status={coachee.assessmentStatus} />
                         </TableCell>
-                        
+
                         <TableCell className="max-w-48">
                           <p className="text-sm font-medium truncate">{coachee.profile}</p>
                         </TableCell>
-                        
+
                         <TableCell>
                           {coachee.lastSession ? (
                             <p className="text-sm text-muted-foreground">
@@ -372,17 +369,17 @@ export default function CoachDashboardPage() {
                             </Badge>
                           )}
                         </TableCell>
-                        
+
                         <TableCell>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
+                          <Button
+                            variant="ghost"
+                            size="sm"
                             className={`text-muted-foreground hover:text-primary ${coachee.hasNotes ? 'text-primary' : ''}`}
                           >
                             <MessageSquare className={`h-4 w-4 ${coachee.hasNotes ? 'fill-current' : ''}`} />
                           </Button>
                         </TableCell>
-                        
+
                         <TableCell className="text-right pr-6">
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
@@ -417,7 +414,7 @@ export default function CoachDashboardPage() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
-            
+
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <Card className="rounded-xl border-border bg-card shadow-sm hover:shadow-md transition-shadow duration-200">
                 <CardHeader className="pb-4">
@@ -440,7 +437,7 @@ export default function CoachDashboardPage() {
                   </Alert>
                 </CardContent>
               </Card>
-              
+
               <Card className="rounded-xl border-border bg-card shadow-sm hover:shadow-md transition-shadow duration-200 md:col-span-2 lg:col-span-2">
                 <CardHeader className="pb-4">
                   <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
@@ -464,7 +461,7 @@ export default function CoachDashboardPage() {
                       </Button>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
                     <div className="h-10 w-10 rounded-full bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center shrink-0">
                       <Edit className="h-5 w-5 text-amber-600 dark:text-amber-400" />
